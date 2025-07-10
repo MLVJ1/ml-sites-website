@@ -38,11 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submission with basic validation
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+
 
             // Basic client-side validation
             const name = contactForm.querySelector('#name').value.trim();
