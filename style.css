@@ -1,0 +1,32 @@
+/* Custom Tailwind Configuration Extension (for JIT mode) */
+/* If you're using a full Tailwind setup with PostCSS, this would go in tailwind.config.js */
+/* For CDN, we need to include it like this or define in a <script> tag in HTML before custom CSS */
+/* For simplicity in this direct file separation, we'll keep the Tailwind config in HTML head.
+   However, if you wanted to manage it here, you'd need a build step.
+   For this exercise, the config in the original HTML's <script> block is okay as a quick fix for CDN.
+   For production, use a proper tailwind.config.js and build process. */
+
+/* Custom Styles */
+.gradient-bg {
+    background: linear-gradient(135deg, #001a35 0%, #000000 100%);
+}
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
