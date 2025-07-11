@@ -6,6 +6,7 @@
     <title>ML Sites - Premium Web Development</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Tailwind config moved back here for CDN compatibility if style.css is truly separate
         tailwind.config = {
             theme: {
                 extend: {
@@ -38,7 +39,8 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body class="font-sans text-white bg-navy">
     <div class="blob hidden md:block top-[-250px] right-[-250px]"></div>
     <div class="blob hidden md:block bottom-[-250px] left-[-250px]"></div>
@@ -88,7 +90,7 @@
                     <div class="md:w-1/2 relative">
                         <div class="relative">
                             <div class="absolute -inset-4 bg-blue-500 rounded-xl blur-lg opacity-20"></div>
-                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="A laptop displaying web code and a coffee cup, symbolizing web development and strategic thinking." class="rounded-lg shadow-2xl relative z-10">
+                            <img src="images/ML Sites Logo.jpg" alt="ML Sites Logo" class="rounded-lg shadow-2xl relative z-10">
                         </div>
                         <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
                     </div>
