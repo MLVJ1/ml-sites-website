@@ -1,18 +1,12 @@
-/* Custom Tailwind Configuration Extension (for JIT mode) */
-/* If you're using a full Tailwind setup with PostCSS, this would go in tailwind.config.js */
-/* For CDN, we need to include it like this or define in a <script> tag in HTML before custom CSS */
-/* For simplicity in this direct file separation, we'll keep the Tailwind config in HTML head.
-   However, if you wanted to manage it here, you'd need a build step.
-   For this exercise, the config in the original HTML's <script> block is okay as a quick fix for CDN.
-   For production, use a proper tailwind.config.js and build process. */
-
 /* Custom Styles */
 .gradient-bg {
     background: linear-gradient(135deg, #001a35 0%, #000000 100%);
 }
+
 .nav-link {
     position: relative;
 }
+
 .nav-link::after {
     content: '';
     position: absolute;
@@ -23,10 +17,46 @@
     background-color: white;
     transition: width 0.3s ease;
 }
+
 .nav-link:hover::after {
     width: 100%;
 }
+
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Mobile-specific adjustments for better touch targets and layout */
+/* Using a common breakpoint like Tailwind's 'md' (768px) */
+@media (max-width: 767px) { 
+    /* Ensure buttons and interactive elements are easily tappable */
+    button, a[role="button"], input[type="submit"] {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    /* Add more padding to navigation links for easier tapping */
+    /* Ensure your mobile menu items (if they use .nav-link) also get this */
+    .nav-link {
+        padding: 12px 0; /* Adjust vertical padding for better touch area */
+    }
+
+    /* Example: If your mobile menu takes full width and stacks items */
+    #mobile-menu {
+        width: 100%;
+        /* Add other styling for your mobile menu, e.g., background, padding */
+        background-color: #001a35; /* Example background */
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    #mobile-menu ul {
+        flex-direction: column; /* Stack menu items vertically */
+        align-items: center; /* Center items if desired */
+    }
+
+    #mobile-menu li {
+        margin-bottom: 15px; /* Space between mobile menu items */
+    }
 }

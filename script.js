@@ -1,4 +1,7 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', () => {
+
     // Mobile menu toggle
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -6,8 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuBtn && mobileMenu) {
         menuBtn.addEventListener('click', () => {
             const isHidden = mobileMenu.classList.contains('hidden');
+            // Toggle Tailwind's 'hidden' class to show/hide the menu
             mobileMenu.classList.toggle('hidden');
-            menuBtn.setAttribute('aria-expanded', !isHidden); // Toggle aria-expanded
+            // Toggle aria-expanded for accessibility
+            menuBtn.setAttribute('aria-expanded', !isHidden); 
         });
     }
 
@@ -21,26 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetElement) {
                 // Calculate scroll position, accounting for fixed nav height
-                const navHeight = document.querySelector('nav').offsetHeight;
-                const offsetTop = targetElement.offsetTop - navHeight - 20; // Added extra padding
+                // Ensure your main navigation has an ID, e.g., <nav id="main-nav"> or just select 'nav'
+                const navElement = document.querySelector('nav'); 
+                const navHeight = navElement ? navElement.offsetHeight : 0; 
+                // Added extra padding (-20px) to ensure content isn't directly under the nav
+                const offsetTop = targetElement.offsetTop - navHeight - 20; 
 
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
 
-                // Close mobile menu if open
-                if (!mobileMenu.classList.contains('hidden')) {
+                // Close mobile menu if open after clicking a link
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                     mobileMenu.classList.add('hidden');
-                    menuBtn.setAttribute('aria-expanded', false);
+                    if (menuBtn) { 
+                        menuBtn.setAttribute('aria-expanded', false);
+                    }
                 }
             }
         });
     });
 
+    // Contact Form Validation
+    const contactForm = document.getElementById('contact-form'); // Ensure your form has this ID
 
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
 
-            // Basic client-side validation
             const name = contactForm.querySelector('#name').value.trim();
             const email = contactForm.querySelector('#email').value.trim();
             const message = contactForm.querySelector('#message').value.trim();
@@ -50,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Simple email format validation (more robust validation might be needed for production)
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(email)) {
                 alert('Please enter a valid email address.');
