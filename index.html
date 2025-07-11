@@ -6,201 +6,241 @@
     <title>ML Sites - Premium Web Development</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Tailwind config moved back here for CDN compatibility if style.css is truly separate
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         navy: '#001f3f',
                         darknavy: '#001a35',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fade-in-up 0.8s ease-out forwards', // Added for scroll animation
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(20px)' },
+                        },
+                        'fade-in-up': { // Keyframe for fade-in-up animation
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="font-sans text-white">
-    <nav class="fixed w-full bg-navy z-50 shadow-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold">
-                    <span class="text-white">ML</span>
-                    <span class="text-blue-300">Sites</span>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#services" class="nav-link">Services</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-white focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-darknavy py-4 px-6" role="menu" aria-labelledby="menu-btn">
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="nav-link" role="menuitem">Home</a>
-                <a href="#about" class="nav-link" role="menuitem">About</a>
-                <a href="#services" class="nav-link" role="menuitem">Services</a>
-                <a href="#contact" class="nav-link" role="menuitem">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <section id="home" class="gradient-bg min-h-screen flex items-center pt-20">
-        <div class="container mx-auto px-6 py-20">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6">We Build <span class="text-blue-300">Exceptional</span> Websites</h1>
-                    <p class="text-xl mb-8 text-gray-300">Combining corporate strategy with stunning design to create digital experiences that drive results.</p>
-                    <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-semibold transition duration-300 inline-block">Get Started</a>
-                </div>
-                <div class="md:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="A laptop displaying web code and a coffee cup, symbolizing web development and strategic thinking." class="rounded-lg shadow-2xl">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="bg-navy py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">About <span class="text-blue-300">ML Sites</span></h2>
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <div class="bg-darknavy p-8 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold mb-4">Our Story</h3>
-                        <p class="mb-6 text-gray-300">ML Sites was founded by Vhugala Lephauphau and Mutshidzi Mafune with a shared vision to bridge the gap between strategic business thinking and beautiful digital design.</p>
-                        <p class="text-gray-300">We combine Vhugala's corporate mindset with Mutshidzi's creative designs to deliver websites that not only look stunning but also drive business results.</p>
+    <link rel="stylesheet" href="style.css"> </head>
+<body class="font-sans text-white bg-navy">
+    <div class="blob hidden md:block top-[-250px] right-[-250px]"></div>
+    <div class="blob hidden md:block bottom-[-250px] left-[-250px]"></div>
+    
+    <div class="relative overflow-hidden">
+        <nav class="fixed w-full bg-navy z-50 shadow-lg backdrop-blur-sm bg-opacity-90">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-2xl font-bold z-10">
+                        <span class="text-white">ML</span>
+                        <span class="text-blue-300">Sites</span>
                     </div>
-                </div>
-                <div class="md:w-1/2">
-                    <div class="flex flex-col space-y-6">
-                        <div class="bg-darknavy p-6 rounded-lg shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <div class="bg-blue-500 p-3 rounded-full mr-4">
-                                    <i class="fas fa-brain text-white"></i>
-                                </div>
-                                <h3 class="text-xl font-bold">Vhugala Lephauphau</h3>
-                            </div>
-                            <p class="text-gray-300">With a sharp corporate mindset, Vhugala ensures every website we build aligns perfectly with your business objectives and delivers measurable results.</p>
-                        </div>
-                        <div class="bg-darknavy p-6 rounded-lg shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <div class="bg-blue-500 p-3 rounded-full mr-4">
-                                    <i class="fas fa-paint-brush text-white"></i>
-                                </div>
-                                <h3 class="text-xl font-bold">Mutshidzi Mafune</h3>
-                            </div>
-                            <p class="text-gray-300">Mutshidzi's exceptional design skills bring creativity and aesthetic excellence to every project, ensuring your website stands out from the competition.</p>
-                        </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#services" class="nav-link">Services</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+                    <div class="md:hidden z-10">
+                        <button id="menu-btn" class="text-white focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="services" class="bg-darknavy py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Our Website <span class="text-blue-300">Solutions</span></h2>
-            <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">We design and develop custom websites tailored to showcase your business, sell your products, or highlight your work.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-navy p-8 rounded-lg transition duration-300">
-                    <div class="bg-blue-500 p-4 rounded-full inline-block mb-6">
-                        <i class="fas fa-file-alt text-2xl"></i> </div>
-                    <h3 class="text-xl font-bold mb-4">Informational One-Pagers</h3>
-                    <p class="text-gray-300 mb-4">Concise and effective single-page websites to quickly introduce your business, services, and contact information.</p>
-                    <ul class="text-gray-400 space-y-2">
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Quick Launch</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Essential Business Info</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Lead Generation Focused</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-navy p-8 rounded-lg transition duration-300">
-                    <div class="bg-blue-500 p-4 rounded-full inline-block mb-6">
-                        <i class="fas fa-shopping-cart text-2xl"></i> </div>
-                    <h3 class="text-xl font-bold mb-4">E-commerce Websites</h3>
-                    <p class="text-gray-300 mb-4">Robust online stores designed to sell your products or services securely and efficiently to a global audience.</p>
-                    <ul class="text-gray-400 space-y-2">
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Secure Payment Gateways</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Product Management</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> User-Friendly Shopping Experience</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-navy p-8 rounded-lg transition duration-300">
-                    <div class="bg-blue-500 p-4 rounded-full inline-block mb-6">
-                        <i class="fas fa-image text-2xl"></i> </div>
-                    <h3 class="text-xl font-bold mb-4">Portfolio & Showcase Sites</h3>
-                    <p class="text-gray-300 mb-4">Visually stunning websites to display your creative work, projects, or professional achievements.</p>
-                    <ul class="text-gray-400 space-y-2">
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> High-Resolution Galleries</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Engaging Layouts</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Personal Branding</li>
-                    </ul>
+            <div id="mobile-menu" class="hidden md:hidden bg-darknavy py-4 px-6" role="menu" aria-labelledby="menu-btn">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="nav-link" role="menuitem">Home</a>
+                    <a href="#about" class="nav-link" role="menuitem">About</a>
+                    <a href="#services" class="nav-link" role="menuitem">Services</a>
+                    <a href="#contact" class="nav-link" role="menuitem">Contact</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <section id="contact" class="gradient-bg py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get In <span class="text-blue-300">Touch</span></h2>
-            <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">Ready to start your project? Contact us today and let's create something amazing together.</p>
+        <section id="home" class="gradient-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+            <div class="container mx-auto px-6 py-20 z-10">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">We Build <span class="text-blue-300">Exceptional</span> Websites</h1>
+                        <p class="text-xl mb-8 text-gray-300 max-w-lg">Combining corporate strategy with stunning design to create digital experiences that drive results.</p>
+                        <div class="flex space-x-4">
+                            <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-semibold transition duration-300 inline-block transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">Get Started</a>
+                            <a href="#services" class="border border-blue-300 text-blue-300 hover:bg-blue-300 hover:text-navy px-8 py-3 rounded-full font-semibold transition duration-300 inline-block transform hover:scale-105">Our Services</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 relative">
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-blue-500 rounded-xl blur-lg opacity-20"></div>
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="A laptop displaying web code and a coffee cup, symbolizing web development and strategic thinking." class="rounded-lg shadow-2xl relative z-10">
+                        </div>
+                        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator hidden md:block"></div>
+        </section>
 
-            <div class="flex flex-col md:flex-row">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <div class="bg-navy p-8 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="bg-blue-500 p-3 rounded-full mr-4">
-                                    <i class="fas fa-envelope"></i>
+        <section id="about" class="bg-navy py-20 relative overflow-hidden">
+            <div class="floating-shape w-64 h-64 bg-blue-500 rounded-full -top-32 -left-32 animate-float"></div>
+            <div class="floating-shape w-96 h-96 bg-blue-300 rounded-full -bottom-48 -right-48 animate-float-reverse"></div>
+            
+            <div class="container mx-auto px-6 z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">About <span class="text-blue-300">ML Sites</span></h2>
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                        <div class="bg-darknavy p-8 rounded-lg shadow-lg backdrop-blur-sm bg-opacity-80 border border-gray-700/50">
+                            <h3 class="text-2xl font-bold mb-4">Our Story</h3>
+                            <p class="mb-6 text-gray-300">ML Sites was founded by Vhugala Lephauphau and Mutshidzi Mafune with a shared vision to bridge the gap between strategic business thinking and beautiful digital design.</p>
+                            <p class="text-gray-300">We combine Vhugala's corporate mindset with Mutshidzi's creative designs to deliver websites that not only look stunning but also drive business results.</p>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="flex flex-col space-y-6">
+                            <div class="bg-darknavy p-6 rounded-lg shadow-lg backdrop-blur-sm bg-opacity-80 border border-gray-700/50">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-blue-500 p-3 rounded-full mr-4 shadow-lg">
+                                        <i class="fas fa-brain text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold">Vhugala Lephauphau</h3>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Email Us</h4>
-                                    <a href="mailto:mlsitecreation@gmail.com" class="text-blue-300 hover:underline">mlsitecreation@gmail.com</a>
-                                </div>
+                                <p class="text-gray-300">With a sharp corporate mindset, Vhugala ensures every website we build aligns perfectly with your business objectives and delivers measurable results.</p>
                             </div>
-                            <div class="flex items-start">
-                                <div class="bg-blue-500 p-3 rounded-full mr-4">
-                                    <i class="fas fa-comment"></i>
+                            <div class="bg-darknavy p-6 rounded-lg shadow-lg backdrop-blur-sm bg-opacity-80 border border-gray-700/50">
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-blue-500 p-3 rounded-full mr-4 shadow-lg">
+                                        <i class="fas fa-paint-brush text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold">Mutshidzi Mafune</h3>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Our Promise</h4>
-                                    <p class="text-gray-300">We respond to all inquiries within 24 hours to discuss your project needs.</p>
-                                </div>
+                                <p class="text-gray-300">Mutshidzi's exceptional design skills bring creativity and aesthetic excellence to every project, ensuring your website stands out from the competition.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="md:w-1/2">
-                    <form id="contact-form" name="contact" data-netlify="true" class="bg-navy p-8 rounded-lg shadow-lg">
-                        <div class="mb-6">
-                            <label for="name" class="block mb-2 font-medium">Your Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-darknavy border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        <section id="services" class="bg-darknavy py-20 relative overflow-hidden">
+            <div class="container mx-auto px-6 z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Our Website <span class="text-blue-300">Solutions</span></h2>
+                <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">We design and develop custom websites tailored to showcase your business, sell your products, or highlight your work.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card bg-navy p-8 rounded-lg transition duration-300 hover:bg-opacity-90 border border-gray-700/50 backdrop-blur-sm">
+                        <div class="bg-blue-500 p-4 rounded-full inline-block mb-6 shadow-lg">
+                            <i class="fas fa-file-alt text-2xl"></i>
                         </div>
-                        <div class="mb-6">
-                            <label for="email" class="block mb-2 font-medium">Email Address</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-darknavy border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <h3 class="text-xl font-bold mb-4">Informational One-Pagers</h3>
+                        <p class="text-gray-300 mb-4">Concise and effective single-page websites to quickly introduce your business, services, and contact information.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Quick Launch</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Essential Business Info</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Lead Generation Focused</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card bg-navy p-8 rounded-lg transition duration-300 hover:bg-opacity-90 border border-gray-700/50 backdrop-blur-sm">
+                        <div class="bg-blue-500 p-4 rounded-full inline-block mb-6 shadow-lg">
+                            <i class="fas fa-shopping-cart text-2xl"></i>
                         </div>
-                        <div class="mb-6">
-                            <label for="message" class="block mb-2 font-medium">Your Message</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-darknavy border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        <h3 class="text-xl font-bold mb-4">E-commerce Websites</h3>
+                        <p class="text-gray-300 mb-4">Robust online stores designed to sell your products or services securely and efficiently to a global audience.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Secure Payment Gateways</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Product Management</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> User-Friendly Shopping Experience</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card bg-navy p-8 rounded-lg transition duration-300 hover:bg-opacity-90 border border-gray-700/50 backdrop-blur-sm">
+                        <div class="bg-blue-500 p-4 rounded-full inline-block mb-6 shadow-lg">
+                            <i class="fas fa-image text-2xl"></i>
                         </div>
-                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">Send Message</button>
-                    </form>
+                        <h3 class="text-xl font-bold mb-4">Portfolio & Showcase Sites</h3>
+                        <p class="text-gray-300 mb-4">Visually stunning websites to display your creative work, projects, or professional achievements.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> High-Resolution Galleries</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Engaging Layouts</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Personal Branding</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="contact" class="gradient-bg py-20 relative overflow-hidden">
+            <div class="floating-shape w-64 h-64 bg-blue-300 rounded-full top-32 left-1/4 animate-float"></div>
+            <div class="floating-shape w-80 h-80 bg-blue-500 rounded-full bottom-32 right-1/4 animate-float-reverse"></div>
+            
+            <div class="container mx-auto px-6 z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get In <span class="text-blue-300">Touch</span></h2>
+                <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">Ready to start your project? Contact us today and let's create something amazing together.</p>
+
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                        <div class="bg-navy p-8 rounded-lg shadow-lg backdrop-blur-sm bg-opacity-80 border border-gray-700/50">
+                            <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-blue-500 p-3 rounded-full mr-4 shadow-lg">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-1">Email Us</h4>
+                                        <a href="mailto:mlsitecreation@gmail.com" class="text-blue-300 hover:underline">mlsitecreation@gmail.com</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-blue-500 p-3 rounded-full mr-4 shadow-lg">
+                                        <i class="fas fa-comment"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-1">Our Promise</h4>
+                                        <p class="text-gray-300">We respond to all inquiries within 24 hours to discuss your project needs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:w-1/2">
+                        <form id="contact-form" name="contact" data-netlify="true" class="bg-navy p-8 rounded-lg shadow-lg backdrop-blur-sm bg-opacity-80 border border-gray-700/50">
+                            <div class="mb-6">
+                                <label for="name" class="block mb-2 font-medium">Your Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-darknavy border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block mb-2 font-medium">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-darknavy border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block mb-2 font-medium">Your Message</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-darknavy border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <script src="script.js"></script>
 </body>
